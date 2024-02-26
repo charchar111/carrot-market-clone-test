@@ -56,37 +56,37 @@ async function handler(
 
   // 실제 토큰 발송 api 주석 처리
   // 코스트 낭비 방지용
-  // if (phone) {
-  //   const message = await twilioClient.messages.create({
-  //     body: `캐럿마켓 클론에서 보낸 인증메시지입니다. 로그인을 위한 토큰입니다. \n ${payload}`,
-  //     to: process.env.PHONE_NUMBER!, // Text your number
-  //     messagingServiceSid: process.env.TWLIO_MESSAGE_SERVICE_SID,
-  //   });
+  if (phone) {
+    const message = await twilioClient.messages.create({
+      body: `캐럿마켓 클론에서 보낸 인증메시지입니다. 로그인을 위한 토큰입니다. \n ${payload}`,
+      to: "+82" + phone, // Text your number
+      messagingServiceSid: process.env.TWLIO_MESSAGE_SERVICE_SID,
+    });
 
-  //   console.log(message);
-  // }
+    console.log(message);
+  }
 
   // 실제 토큰 발송 api 주석 처리
   // 코스트 낭비 방지용
-  // if (email) {
-  //   console.log("이메일 form 확인, 인증 작업 1단계 시작");
-  //   const emailOption = {
-  //     from: process.env.MAIL_ID,
-  //     to: email,
-  //     subject: "Nomad coder Carrot market clone Authentication Email",
-  //     text: `authentication code: ${payload}`,
-  //   };
+  if (email) {
+    console.log("이메일 form 확인, 인증 작업 1단계 시작");
+    const emailOption = {
+      from: process.env.MAIL_ID,
+      to: email,
+      subject: "Nomad coder Carrot market clone Authentication Email",
+      text: `authentication code: ${payload}`,
+    };
 
-  //   const errorCallback = (error: any, responses: any) => {
-  //     if (error) console.log("email error", error);
-  //     else if (responses) console.log("email responses", responses);
-  //     return;
-  //   };
+    const errorCallback = (error: any, responses: any) => {
+      if (error) console.log("email error", error);
+      else if (responses) console.log("email responses", responses);
+      return;
+    };
 
-  //   const send = await smtpTransport.sendMail(emailOption, errorCallback);
-  //   smtpTransport.close();
-  //   console.log(send);
-  // }
+    const send = await smtpTransport.sendMail(emailOption, errorCallback);
+    smtpTransport.close();
+    console.log(send);
+  }
 
   console.log(token);
   return res.status(200).json({ ok: true });
