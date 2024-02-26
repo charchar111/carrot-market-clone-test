@@ -77,13 +77,15 @@ async function handler(
       text: `authentication code: ${payload}`,
     };
 
-    const errorCallback = (error: any, responses: any) => {
-      if (error) console.log("email error", error);
-      else if (responses) console.log("email responses", responses);
-      return;
-    };
+    // vercel 배포에서 errorCallback이 오류를 일으킴. 일단 주석 처리
+    // const errorCallback = (error: any, responses: any) => {
+    //   if (error) console.log("email error", error);
+    //   else if (responses) console.log("email responses", responses);
+    //   return;
+    // };
 
-    const send = await smtpTransport.sendMail(emailOption, errorCallback);
+    // const send = await smtpTransport.sendMail(emailOption, errorCallback);
+    const send = await smtpTransport.sendMail(emailOption);
     smtpTransport.close();
     console.log(send);
   }
