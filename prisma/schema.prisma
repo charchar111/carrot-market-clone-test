@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id              Int         @id @default(autoincrement())
+  phone           String?     @unique
+  email           String?     @unique
+  name            String
+  avatar          String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  tokens          Token[]
+  Products        Product[]
+  Posts           Post[]
+  Answers         Answer[]
+  Wonderings      Wondering[]
+  WrittenReviews  Review[]    @relation(name: "WrittenReviews")
+  ReceivedReviews Review[]    @relation(name: "ReceivedReviews")
+  Records         Record[]
+  Streams         Stream[]
+  Messages        Message[]
+}
+
+model Token {
+  id        Int      @id @default(autoincrement())
+  payload   String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  price       Int
+  image       String
+  name        String
+  description String   @db.MediumText
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Records     Record[]
+
+  @@index([userId])
+}
+
+model Post {
+  id         Int         @id @default(autoincrement())
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     Int
+  title      String
+  content    String      @db.MediumText
+  latitude   Float?
+  longitude  Float?
+  Answers    Answer[]
+  Wonderings Wondering[]
+
+  @@index([userId])
+}
+
+model Answer {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    Int
+  content   String   @db.MediumText
+
+  @@index([userId])
+  @@index([postId])
+}
+
+model Wondering {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    Int
+
+  @@index([userId])
+  @@index([postId])
+}
+
+model Review {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  content      String   @db.MediumText
+  score        Int      @default(1)
+  CreatedBy    User     @relation(name: "WrittenReviews", fields: [CreatedById], references: [id], onDelete: Cascade)
+  CreatedById  Int
+  CreatedFor   User     @relation(name: "ReceivedReviews", fields: [CreatedForId], references: [id], onDelete: Cascade)
+  CreatedForId Int
+
+  @@index([CreatedById])
+  @@index([CreatedForId])
+}
+
+model Record {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  kind      Kind
+
+  @@index([userId])
+  @@index([productId])
+}
+
+enum Kind {
+  PURCHASE
+  SALE
+  FAVORITE
+}
+
+model Stream {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  name        String
+  description String?   @db.MediumText
+  price       Int
+  Messages    Message[]
+  streamUrl   String?
+  streamKey   String?
+  streamId    String?
+
+  @@index([userId])
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  stream    Stream   @relation(fields: [streamId], references: [id], onDelete: Cascade)
+  streamId  Int
+  content   String   @db.MediumText
+
+  @@index([userId])
+  @@index([streamId])
+}
