@@ -1,5 +1,8 @@
 # Carrot Market
 
+## Link
+https://carrot-market-clone-test.vercel.app/
+
 ## 컨셉
 
 이 프로젝트는 next js(page-router)를 이용한 풀스택 앱 제작 연습이 목적입니다.
@@ -53,6 +56,8 @@
   - phone: twilio
 
 ### authorize ✅
+
+
 
 - 유저의 로그인 성공 시, 세션에 유저 id 저장
 
