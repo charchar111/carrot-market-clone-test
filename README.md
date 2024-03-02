@@ -43,26 +43,21 @@ https://carrot-market-clone-test.vercel.app/
 - planet scale, prisma
 
 - 데이터 요청 라이브러리
-  - SWR
+  - SWR | 리엑트 쿼리보다 가벼워 초기 렌더링 속도 향상
  
 - typescript
 
 
 ## 기능 세부사항
 
-### authentication ✅
+### 인증
 - 유저가 인증 수단으로 email, phone 중 선택
 - 1차 인증 주소로 발송된 토큰을 입력하여 인증
   - email 인증 기술 스택: nodemailer
   - phone 인증 기술 스택: twilio
 
-### authorize ✅
+### authorize
+- 인증 성공 시, 유저 id를 담은 암호화된 쿠키 저장
+  - iron- session | 쿠키를 암호화하는 라이브러리
 
 
-
-- 유저의 로그인 성공 시, 세션에 유저 id 저장
-
-  - iron- session 사용
-
-- 유저의 로그인 여부 확인
-  - SWR : 데이터 패치, 업데이트 기능, 리엑트 쿼리보다 가벼움
