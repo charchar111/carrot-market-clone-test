@@ -19,10 +19,11 @@ https://carrot-market-clone-test.vercel.app/
 
 ## 기술 스택
 
+nextJS
 <details>
-<summary><h3>nextJS</h3> </summary>
+<summary> 왜 CRA(create-react-app)가 아닌 nextJS인가 </summary>
 
-  ## 왜 CRA(create-react-app)가 아닌 nextJS인가
+sfsfsf
   </details>
 
 
