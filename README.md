@@ -4,56 +4,55 @@
 https://carrot-market-clone-test.vercel.app/
 
 ## 컨셉
+당근 마켓에서 영감을 받은 이 프로젝트는 유저가 
+- 개인 중고 상품의 거래
+- 게시판 기반의 지역 커뮤니티
+- 라이브 커머스
+를 통합하여 할 수 있도록 하였습니다.
 
-이 프로젝트는 next js(page-router)를 이용한 풀스택 앱 제작 연습이 목적입니다.
-주요 기술 스택은 다음과 같습니다.
+특히 지역 기반의 유저 간 상호작용을 위해 유저의 지역 정보를 이용합니다.
 
-- 스타일링
+## 기능
+- [2차 인증(email, 휴대폰 메시지) 기반의 로그인](#인증)
+- 
 
-  - tailwind
-  - JSX
 
-- 데이터베이스
+## 기술 스택
 
-  - planet scale, prisma
+<details>
+<summary><h3>nextJS</h3> </summary>
+
+  ## 왜 CRA(create-react-app)가 아닌 nextJS인가
+  </details>
+
+
+
+
+
+### tailwind
+
+
+
+
+
+
+
+
+
+### 데이터베이스
+planet scale, prisma
     - SQL, 서버리스
 
-- 지원 툴
+- typescript
 
-  - typescript
 
-- 기타
-  - React 18버전 hook
-    - server-side-streaming
-    - server-components
-
-프로젝트의 진행은 노마드 코더 \[풀스택\]캐럿마켓 클론코딩 2022버전에 기반하였습니다.
-
-## 목차
-
-[tailwind](#tailwind)
-
-## 기능 구현
-
-### tailwind ✅
-
-- 각 페이지 구현
-- 재사용 컴포넌트를 별도로 분할
-
-### db ✅
-
-- prisma, planetscale 사용
+## 기능 세부사항
 
 ### authentication ✅
-
-- 1차 인증
-
-  - email, phone 선택
-
-- 2차 인증
-  - 1차 인증 주소로 토큰 발송, 입력
-  - email: nodemailer
-  - phone: twilio
+- 유저가 인증 수단으로 email, phone 중 선택
+- 1차 인증 주소로 발송된 토큰을 입력하여 인증
+  - email 인증 기술 스택: nodemailer
+  - phone 인증 기술 스택: twilio
 
 ### authorize ✅
 
