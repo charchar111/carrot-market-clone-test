@@ -38,6 +38,12 @@ https://carrot-market-clone-test.vercel.app/
   </details>
 
 ### tailwind
+nextJS를 이용해서 빌드 단계나 서버 사이드 렌더링을 할 계획이라면, css-in-js는 이런 계획에 맞지 않습니다. 
+왜냐하면 css-in-js는 브라우저 단계에서 렌더링되는 데 드는 속도의 문제 등으로 초기 렌더링에 좋지 못한 영향을 줄 수 있기 때문입니다.
+또한 유지보수의 관점에서도 tailwind는 클래스를 이용하여 직관적인 스타일링이 가능합니다.
+단, 해결해야할 문제도 있었습니다.
+[tailwindCSS 사용 중 마주쳤던 문제](#이슈 | 해결방안)
+
 
 ### 데이터베이스
 - planet scale, prisma
@@ -60,4 +66,9 @@ https://carrot-market-clone-test.vercel.app/
 - 인증 성공 시, 유저 id를 담은 암호화된 쿠키 저장
   - iron- session | 쿠키를 암호화하는 라이브러리
 
+## 이슈 | 해결방안
+
+
+
+## 배운 점
 
